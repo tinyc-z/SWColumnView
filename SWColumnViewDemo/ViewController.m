@@ -21,7 +21,7 @@
     [super viewDidLoad];
     self.tableView = [[SWColumnView alloc] initWithFrame:self.view.bounds];
     //    self.tableView.alwaysBounceHorizontal=YES;
-    self.tableView.contentInset=UIEdgeInsetsMake(10, 50, 5, 0);
+//    self.tableView.contentInset=UIEdgeInsetsMake(10, 50, 5, 0);
     //    UILabel *item=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
     //    item.backgroundColor=[UIColor redColor];
     
@@ -33,7 +33,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     NSLog(@"viewDidLoad");
     self.datas=[[NSMutableArray alloc] init];
-    for (NSInteger i=0; i<100; i++) {
+    for (NSInteger i=0; i<50; i++) {
         [self.datas addObject:@(i)];
     }
     
@@ -58,13 +58,12 @@
         cell = [[SWColumnViewCell alloc] initWithReuseIdentifier:identifiter];
         cell.backgroundColor=[UIColor colorWithRed:(rand()%10)/10.f green:(rand()%10)/10.f blue:(rand()%10)/10.f alpha:1];
     }
-    cell.title.text=[NSString stringWithFormat:@"i:%@",self.datas[index]];
     return cell;
 }
 
 - (CGFloat)columnView:(SWColumnView *)View widthForLineAtIndex:(NSInteger )index
 {
-    return 20+index;
+    return 20+index*5;
 }
 
 - (void)columnView:(SWColumnView *)view didSelectIndex:(NSInteger)index

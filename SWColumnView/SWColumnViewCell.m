@@ -20,11 +20,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.title=[[UILabel alloc] initWithFrame:CGRectZero];
-        self.title.textAlignment = NSTextAlignmentCenter;
-        self.title.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.title];
-
     }
     return self;
 }
@@ -32,7 +27,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.title.frame=CGRectMake(0, 10, self.frame.size.width, 30);
 }
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
@@ -45,7 +39,6 @@
 
 - (void)prepareForReuse
 {
-    self.title.text=nil;
 }
 
 

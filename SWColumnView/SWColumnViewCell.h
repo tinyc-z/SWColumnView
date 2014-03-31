@@ -13,8 +13,6 @@
 
 @property(nonatomic,strong,readonly)NSString *reuseIdentifier;
 
-@property (nonatomic,strong)UILabel *title;
-
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 - (void)prepareForReuse;
