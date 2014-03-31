@@ -3,4 +3,4 @@
 <br/>
 <br/>
 
-![Mou icon](https://github.com/iBcker/SWColumnView/master/snapshoot/shoot1.png)
+![Mou icon](https://raw.githubusercontent.com/iBcker/SWColumnView/master/snapshoot/shoot1.png)
