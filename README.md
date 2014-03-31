@@ -1,4 +1,6 @@
-SWColumnView
-============
+#SWColumnView
+**一个简单的横向table view**
+<br/>
+<br/>
 
-A Horizontal talbeView , ColumnView，一个横向的tableview
+![Mou icon](https://github.com/iBcker/SWColumnView/master/snapshoot/shoot1.png)
