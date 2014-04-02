@@ -85,10 +85,10 @@
 //    NSLog(@"%@",NSStringFromSelector(_cmd));
 //}
 
-//- (void)pageView:(SWPagingView *)page didLoadIndex:(NSInteger)index
-//{
-//    NSLog(@"%@",NSStringFromSelector(_cmd));
-//}
+- (void)pageView:(SWPagingView *)page didLoadIndex:(NSInteger)index
+{
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+}
 
 //- (void)pageView:(SWColumnView *)page didUnLoadIndex:(NSInteger)index
 //{

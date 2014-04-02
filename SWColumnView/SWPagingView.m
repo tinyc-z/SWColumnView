@@ -147,6 +147,13 @@
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if([delegate respondsToSelector:@selector(pageViewDidScroll:)]){
+        [delegate pageViewDidScroll:self];
+    }
+}
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (!decelerate) {

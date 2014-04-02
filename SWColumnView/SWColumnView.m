@@ -153,6 +153,7 @@ NSString * const kCCellIndexKey = @"index";
                 //visible
                 cell=[self insertCellAtLineIndex:i withFrame:CGRectMake(offsetL, 0, tmpfloat, _cellsHeight)];
                 [_visibleCells addObject:cell];
+                [self didLoadCell:i];
                 start=YES;
             }else{
                 if (start) {
@@ -250,7 +251,6 @@ NSString * const kCCellIndexKey = @"index";
     _cellsWidth = arr;
     _cellsHeight = CGRectGetHeight(self.bounds)-cotentInsetY;
     
-    self.contentSize=CGSizeMake(widthCount,_cellsHeight);
     
     for (SWColumnViewCell *cell in _visibleCells) {
         [self enqueueReusableCell:cell];
@@ -261,8 +261,8 @@ NSString * const kCCellIndexKey = @"index";
     }
     
     [_visibleCells removeAllObjects];
-    
-    [self layoutVisibleCells];
+
+    self.contentSize=CGSizeMake(widthCount,_cellsHeight);
 }
 
 
