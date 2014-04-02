@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4743317B18EC028200BCCCF0 /* SWPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743317A18EC028200BCCCF0 /* SWPagingView.m */; };
 		475B010E18E93A0600A283E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 475B010D18E93A0600A283E6 /* Foundation.framework */; };
 		475B011018E93A0600A283E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 475B010F18E93A0600A283E6 /* CoreGraphics.framework */; };
 		475B011218E93A0600A283E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 475B011118E93A0600A283E6 /* UIKit.framework */; };
@@ -23,6 +24,7 @@
 		475B013918E93A0600A283E6 /* SWColumnViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 475B013818E93A0600A283E6 /* SWColumnViewDemoTests.m */; };
 		475B014718E93A2D00A283E6 /* SWColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475B014418E93A2D00A283E6 /* SWColumnView.m */; };
 		475B014818E93A2D00A283E6 /* SWColumnViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 475B014618E93A2D00A283E6 /* SWColumnViewCell.m */; };
+		479ABE5218E95E5E00C64AC3 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479ABE5118E95E5E00C64AC3 /* Reveal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4743317918EC028200BCCCF0 /* SWPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWPagingView.h; path = SWColumnView/SWPagingView.h; sourceTree = "<group>"; };
+		4743317A18EC028200BCCCF0 /* SWPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWPagingView.m; path = SWColumnView/SWPagingView.m; sourceTree = "<group>"; };
 		475B010A18E93A0600A283E6 /* SWColumnViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWColumnViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		475B010D18E93A0600A283E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		475B010F18E93A0600A283E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,6 +63,7 @@
 		475B014418E93A2D00A283E6 /* SWColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWColumnView.m; sourceTree = "<group>"; };
 		475B014518E93A2D00A283E6 /* SWColumnViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWColumnViewCell.h; sourceTree = "<group>"; };
 		475B014618E93A2D00A283E6 /* SWColumnViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWColumnViewCell.m; sourceTree = "<group>"; };
+		479ABE5118E95E5E00C64AC3 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +74,7 @@
 				475B011018E93A0600A283E6 /* CoreGraphics.framework in Frameworks */,
 				475B011218E93A0600A283E6 /* UIKit.framework in Frameworks */,
 				475B010E18E93A0600A283E6 /* Foundation.framework in Frameworks */,
+				479ABE5218E95E5E00C64AC3 /* Reveal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,9 +91,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4743317C18EC029200BCCCF0 /* SWPagingView */ = {
+			isa = PBXGroup;
+			children = (
+				4743317918EC028200BCCCF0 /* SWPagingView.h */,
+				4743317A18EC028200BCCCF0 /* SWPagingView.m */,
+			);
+			name = SWPagingView;
+			sourceTree = "<group>";
+		};
 		475B010118E93A0600A283E6 = {
 			isa = PBXGroup;
 			children = (
+				4743317C18EC029200BCCCF0 /* SWPagingView */,
+				479ABE5118E95E5E00C64AC3 /* Reveal.framework */,
 				475B014218E93A2D00A283E6 /* SWColumnView */,
 				475B011318E93A0600A283E6 /* SWColumnViewDemo */,
 				475B013218E93A0600A283E6 /* SWColumnViewDemoTests */,
@@ -267,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4743317B18EC028200BCCCF0 /* SWPagingView.m in Sources */,
 				475B014718E93A2D00A283E6 /* SWColumnView.m in Sources */,
 				475B014818E93A2D00A283E6 /* SWColumnViewCell.m in Sources */,
 				475B012418E93A0600A283E6 /* ViewController.m in Sources */,
@@ -396,9 +414,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SWColumnViewDemo/SWColumnViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "SWColumnViewDemo/SWColumnViewDemo-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Reveal,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -409,9 +436,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SWColumnViewDemo/SWColumnViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "SWColumnViewDemo/SWColumnViewDemo-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Reveal,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -476,6 +512,7 @@
 				475B013E18E93A0600A283E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		475B013F18E93A0600A283E6 /* Build configuration list for PBXNativeTarget "SWColumnViewDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +521,7 @@
 				475B014118E93A0600A283E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

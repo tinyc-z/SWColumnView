@@ -16,18 +16,24 @@
 @required
 - (NSInteger)columnViewNumberOfColumns:(SWColumnView *)columnView;
 
-- (SWColumnViewCell *)columnView:(SWColumnView *)columnView cellForLineAtIndex:(NSInteger )index;
+- (SWColumnViewCell *)columnView:(SWColumnView *)columnView cellForColumnIndex:(NSInteger )index;
 
 @optional
-- (CGFloat)columnView:(SWColumnView *)columnView widthForLineAtIndex:(NSInteger )index;
+- (CGFloat)columnView:(SWColumnView *)columnView widthForColumnAtIndex:(NSInteger )index;
 
 @end
 
 
-@protocol  SWColumnViewDelegate <NSObject,UIScrollViewDelegate>
+@protocol SWColumnViewDelegate <NSObject,UIScrollViewDelegate>
 
 @optional
-- (void)columnView:(SWColumnView *)board didSelectIndex:(NSInteger)index;
+- (void)columnView:(SWColumnView *)columnView didSelectIndex:(NSInteger)index;
+
+- (void)columnView:(SWColumnView *)columnView willLoadIndex:(NSInteger)index;
+- (void)columnView:(SWColumnView *)columnView didLoadIndex:(NSInteger)index;
+
+- (void)columnView:(SWColumnView *)columnView willUnLoadIndex:(NSInteger)index;
+- (void)columnView:(SWColumnView *)columnView didUnLoadIndex:(NSInteger)index;
 
 @end
 
@@ -35,6 +41,8 @@
 
 @property (nonatomic,assign)id <SWColumnViewDataSource> dataSource;
 @property (nonatomic,assign)id <SWColumnViewDelegate> delegate;
+
+- (void)layoutVisibleCells;//不提倡手动调用
 
 - (SWColumnViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 

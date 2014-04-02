@@ -10,7 +10,7 @@
 
 
 @interface SWColumnViewCell : UIView
-
+@property(nonatomic,assign)NSInteger index;
 @property(nonatomic,strong,readonly)NSString *reuseIdentifier;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;

@@ -38,39 +38,38 @@ NSString * const kCCellIndexKey = @"index";
         tap.delegate = self;
 
         [self addGestureRecognizer:tap];
-//        [self addObserver:self forKeyPath:kCContentOffset options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+        [self addObserver:self forKeyPath:kCContentOffset options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     }
     return self;
 }
 
+
 - (void)dealloc
 {
-//    [self removeObserver:self forKeyPath:kZPContentOffset];
+    [self removeObserver:self forKeyPath:kCContentOffset];
     self.delegate=nil;
     self.dataSource=nil;
 }
 
--(void)layoutSubviews
+//-(void)layoutSubviews
+//{
+//    [super layoutSubviews];
+//}
+
+- (CGFloat)contentBundsLeft
 {
-    [super layoutSubviews];
-    [self layoutVisibleCells];
+    return self.contentOffset.x;
 }
 
+- (CGFloat)contentBundsRight
+{
+    return self.contentOffset.x+CGRectGetWidth(self.bounds);
+}
 
 - (void)layoutVisibleCells
 {
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self reloadData];
-    });
-
-//    NSLog(@"--%@",NSStringFromSelector(_cmd));
-    
-    CGPoint offset= self.contentOffset;
-    
-    CGFloat contentBundsLeft = offset.x;
-    CGFloat contentBundsRight = offset.x+CGRectGetWidth(self.bounds);
+    CGFloat contentBundsLeft = [self contentBundsLeft];
+    CGFloat contentBundsRight = [self contentBundsRight];
     
     CGFloat offsetL = 0.f,offsetR;
     
@@ -87,7 +86,10 @@ NSString * const kCCellIndexKey = @"index";
             [self enqueueReusableCell:cell];
             [cell removeFromSuperview];
             [_visibleCells removeObject:cell];
-            NSLog(@"remove cell %@",[cell valueForKey:kCCellIndexKey]);
+            if ([self.delegate respondsToSelector:@selector(columnView:didUnLoadIndex:)]) {
+                [self.delegate columnView:self didUnLoadIndex:cell.index];
+            }
+//            NSLog(@"remove cell %@",[cell valueForKey:kCCellIndexKey]);
         }else{
             if (isASC) {
                 isASC = NO;
@@ -104,7 +106,7 @@ NSString * const kCCellIndexKey = @"index";
     if ([_visibleCells count]>0) {
         //ASC search
         SWColumnViewCell *cell = [_visibleCells lastObject];
-        index = [self getCellIndex:cell];
+        index = cell.index;
         offsetL = CGRectGetMaxX(cell.frame);
         
         index++;
@@ -115,6 +117,7 @@ NSString * const kCCellIndexKey = @"index";
                 //visible
                 cell=[self insertCellAtLineIndex:i withFrame:CGRectMake(offsetL, 0, tmpfloat, _cellsHeight)];
                 [_visibleCells addObject:cell];
+                [self didLoadCell:i];
             }else{
                 break;
             }
@@ -123,7 +126,7 @@ NSString * const kCCellIndexKey = @"index";
         
         //DESC search
         cell = [_visibleCells firstObject];
-        index = [self getCellIndex:cell];
+        index = cell.index;
         offsetR = CGRectGetMinX(cell.frame);
         
         index--;
@@ -134,6 +137,7 @@ NSString * const kCCellIndexKey = @"index";
                 //visible
                 cell=[self insertCellAtLineIndex:i withFrame:CGRectMake(offsetL, 0, tmpfloat, _cellsHeight)];
                 [_visibleCells insertObject:cell atIndex:0];
+                [self didLoadCell:i];
             }else{
                 break;
             }
@@ -165,6 +169,9 @@ NSString * const kCCellIndexKey = @"index";
 
 - (void)enqueueReusableCell:(SWColumnViewCell *)cell
 {
+    if ([self.delegate respondsToSelector:@selector(columnView:willUnLoadIndex:)]) {
+        [self.delegate columnView:self willUnLoadIndex:cell.index];
+    }
     NSMutableArray *cells = _reusableCells[cell.reuseIdentifier];
     if (cells) {
         [cells addObject:cell];
@@ -175,18 +182,30 @@ NSString * const kCCellIndexKey = @"index";
     }
 }
 
-- (NSInteger)getCellIndex:(SWColumnViewCell *)cell
+- (SWColumnViewCell *)loadCell:(NSInteger)index
 {
-    return [[cell valueForKey:kCCellIndexKey] integerValue];
+    if ([self.delegate respondsToSelector:@selector(columnView:willLoadIndex:)]) {
+        [self.delegate columnView:self willLoadIndex:index];
+    }
+    SWColumnViewCell *cell =[self.dataSource columnView:self cellForColumnIndex:index];
+    return cell;
+}
+
+
+- (void)didLoadCell:(NSInteger)index
+{
+    if ([self.delegate respondsToSelector:@selector(columnView:didLoadIndex:)]) {
+        [self.delegate columnView:self didLoadIndex:index];
+    }
 }
 
 - (SWColumnViewCell *)insertCellAtLineIndex:(NSInteger)index withFrame:(CGRect)frame
 {
-    NSLog(@"insertCellAtLineIndex:%d",index);
-    SWColumnViewCell *cell = [self.dataSource columnView:self cellForLineAtIndex:index];
+//    NSLog(@"insertCellAtLineIndex:%d",index);
+    SWColumnViewCell *cell =[self loadCell:index];
     cell.frame=frame;
     [self insertSubview:cell atIndex:0];
-    [cell setValue:@(index) forKey:kCCellIndexKey];
+    cell.index=index;
     return cell;
 }
 
@@ -201,30 +220,33 @@ NSString * const kCCellIndexKey = @"index";
     return cell;
 }
 
+- (CGFloat)widthForColumnAtIndex:(NSInteger)index
+{
+    if([self.dataSource respondsToSelector:@selector(columnView:widthForColumnAtIndex:)]) {
+        return [self.dataSource columnView:self widthForColumnAtIndex:index];
+    }else{
+        return CGRectGetWidth(self.frame);
+    }
+}
+
+
 - (void)reloadData
 {
-    NSLog(@"--%@",NSStringFromSelector(_cmd));
+//    NSLog(@"--%@",NSStringFromSelector(_cmd));
     _cellcount = [self.dataSource columnViewNumberOfColumns:self];
     
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     CGFloat widthCount = 0,cotentInsetY;
     
     cotentInsetY = self.contentInset.bottom+self.contentInset.top;
-    
-    if([self.dataSource respondsToSelector:@selector(columnView:widthForLineAtIndex:)]) {
-        CGFloat tmp;
-        for (NSInteger i =0;i<_cellcount;i++) {
-            tmp = [self.dataSource columnView:self widthForLineAtIndex:i];
-            arr[i]=@(tmp);
-            widthCount+=tmp;
-        }
-    }else{
-        NSNumber *width =@(CGRectGetWidth(self.frame));
-        for (NSInteger i =0;i<_cellcount;i++) {
-            arr[i]=width;
-        }
-        widthCount=CGRectGetWidth(self.frame)*_cellcount;
+
+    CGFloat tmp;
+    for (NSInteger i =0;i<_cellcount;i++) {
+        tmp = [self widthForColumnAtIndex:i];
+        arr[i]=@(tmp);
+        widthCount+=tmp;
     }
+    
     _cellsWidth = arr;
     _cellsHeight = CGRectGetHeight(self.bounds)-cotentInsetY;
     
@@ -233,17 +255,20 @@ NSString * const kCCellIndexKey = @"index";
     for (SWColumnViewCell *cell in _visibleCells) {
         [self enqueueReusableCell:cell];
         [cell removeFromSuperview];
+        if ([self.delegate respondsToSelector:@selector(columnView:didUnLoadIndex:)]) {
+            [self.delegate columnView:self didUnLoadIndex:cell.index];
+        }
     }
     
     [_visibleCells removeAllObjects];
     
-    [self setNeedsLayout];
+    [self layoutVisibleCells];
 }
 
 
 - (NSArray *)visibleCells
 {
-    return [_visibleCells copy];
+    return _visibleCells;
 }
 
 
@@ -294,19 +319,28 @@ NSString * const kCCellIndexKey = @"index";
         CGPoint location = [gesture locationInView:self];
         for (SWColumnViewCell *v in _visibleCells) {
             if (CGRectContainsPoint(v.frame, location)) {
-                NSInteger index  = [self getCellIndex:v];
-                [self.delegate columnView:self didSelectIndex:index];
+                [self.delegate columnView:self didSelectIndex:v.index];
                 return;
             }
         }
     }
 }
 
+//-(UIView*)hitTest:(CGPoint)point withEvent:(UIEvent*)event
+//{
+//    UIView* child = [super hitTest:point withEvent:event];
+//    if (child == self){
+//    	return self;
+//    }else{
+//        return child;
+//    }
+//}
+
 
 #pragma mark observer
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-//    NSLog(@"-----observeValueForKeyPath");
+    [self layoutVisibleCells];
 }
 
 @end

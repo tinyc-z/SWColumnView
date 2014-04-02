@@ -8,7 +8,6 @@
 
 #import "SWColumnViewCell.h"
 @interface SWColumnViewCell()
-@property(nonatomic,assign)NSInteger index;
 
 @end
 

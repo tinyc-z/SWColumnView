@@ -7,10 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "SWColumnView.h"
+#import "SWPagingView.h"
+
 
 @interface ViewController ()<SWColumnViewDataSource,SWColumnViewDelegate>
-@property (nonatomic,strong)SWColumnView *tableView;
+@property (nonatomic,strong)SWPagingView *tableView;
 @property (nonatomic,strong)NSMutableArray *datas;
 @end
 
@@ -19,25 +20,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[SWColumnView alloc] initWithFrame:self.view.bounds];
-    //    self.tableView.alwaysBounceHorizontal=YES;
-//    self.tableView.contentInset=UIEdgeInsetsMake(10, 50, 5, 0);
-    //    UILabel *item=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-    //    item.backgroundColor=[UIColor redColor];
-    
-    //    [self.tableView addSubview:item];
+    self.tableView = [[SWPagingView alloc] initWithFrame:CGRectInset(self.view.bounds, 50, 50)];
     self.tableView.dataSource=self;
-    //    self.tableView.pagingEnabled=YES;
     self.tableView.delegate=self;
+
+    self.tableView.enqueueReusableCellPaddingLeft=10;
+    self.tableView.enqueueReusableCellPaddingRight=10;
+    
+    
+    self.tableView.clipsToBounds=NO;
+    
+    self.tableView.layer.borderColor=[UIColor blackColor].CGColor;
+    self.tableView.layer.borderWidth=0.5;
+    
     [self.view addSubview:self.tableView];
 	// Do any additional setup after loading the view, typically from a nib.
     NSLog(@"viewDidLoad");
     self.datas=[[NSMutableArray alloc] init];
-    for (NSInteger i=0; i<50; i++) {
+    for (NSInteger i=0; i<50000; i++) {
         [self.datas addObject:@(i)];
     }
-    
+    [self.tableView reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -50,10 +55,10 @@
     return [self.datas count];
 }
 
-- (SWColumnViewCell *)columnView:(SWColumnView *)pagingView cellForLineAtIndex:(NSInteger)index
+- (SWColumnViewCell *)columnView:(SWColumnView *)columnView cellForColumnIndex:(NSInteger )index
 {
     static NSString *identifiter = @"cell";
-    SWColumnViewCell *cell = [pagingView dequeueReusableCellWithIdentifier:identifiter];
+    SWColumnViewCell *cell = [columnView dequeueReusableCellWithIdentifier:identifiter];
     if (!cell) {
         cell = [[SWColumnViewCell alloc] initWithReuseIdentifier:identifiter];
         cell.backgroundColor=[UIColor colorWithRed:(rand()%10)/10.f green:(rand()%10)/10.f blue:(rand()%10)/10.f alpha:1];
@@ -61,12 +66,12 @@
     return cell;
 }
 
-- (CGFloat)columnView:(SWColumnView *)View widthForLineAtIndex:(NSInteger )index
+- (CGFloat)columnView:(SWColumnView *)View widthForColumnAtIndex:(NSInteger )index
 {
-    return 20+index*5;
+    return self.view.frame.size.width-100;
 }
 
-- (void)columnView:(SWColumnView *)view didSelectIndex:(NSInteger)index
+- (void)pageView:(SWColumnView *)view didSelectIndex:(NSInteger)index
 {
     NSLog(@"didSelectIndex%@",[view indexsForVisibleRows]);
     
@@ -74,5 +79,31 @@
     
     [view scrollToStart:YES];
 }
+
+//- (void)pageView:(SWPagingView *)page didStopInIndex:(NSInteger)index
+//{
+//    NSLog(@"%@",NSStringFromSelector(_cmd));
+//}
+
+//- (void)pageView:(SWPagingView *)page didLoadIndex:(NSInteger)index
+//{
+//    NSLog(@"%@",NSStringFromSelector(_cmd));
+//}
+
+//- (void)pageView:(SWColumnView *)page didUnLoadIndex:(NSInteger)index
+//{
+//    NSLog(@"%@",NSStringFromSelector(_cmd));
+//}
+
+
+- (void)pageView:(SWPagingView *)page didAppearIndex:(NSInteger)index
+{
+    NSLog(@"%@:%d",NSStringFromSelector(_cmd),index);
+}
+- (void)pageView:(SWColumnView *)columnView didDisAppearIndex:(NSInteger)index
+{
+    NSLog(@"%@:%d",NSStringFromSelector(_cmd),index);
+}
+
 
 @end
