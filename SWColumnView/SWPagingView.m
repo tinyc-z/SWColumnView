@@ -8,12 +8,10 @@
 
 #import "SWPagingView.h"
 #import "SWColumnView.h"
-#import <objc/runtime.h>
 #import "SWPagingViewCell.h"
 
 
 @interface SWPagingView()<SWColumnViewDelegate>
-//@property(nonatomic,assign)BOOL pagingEadbled;
 @end
 
 @implementation SWPagingView

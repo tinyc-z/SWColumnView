@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface SWColumnViewCell : UIView
 @property(nonatomic,assign)NSInteger index;
 @property(nonatomic,strong,readonly)NSString *reuseIdentifier;
