@@ -24,9 +24,9 @@
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
 
-    self.tableView.enqueueReusableCellPaddingLeft=10;
-    self.tableView.enqueueReusableCellPaddingRight=10;
-    
+//    self.tableView.enqueueReusableCellPaddingLeft=10;
+//    self.tableView.enqueueReusableCellPaddingRight=10;
+//    
     
     self.tableView.clipsToBounds=NO;
     
@@ -58,9 +58,9 @@
 - (SWColumnViewCell *)columnView:(SWColumnView *)columnView cellForColumnIndex:(NSInteger )index
 {
     static NSString *identifiter = @"cell";
-    SWColumnViewCell *cell = [columnView dequeueReusableCellWithIdentifier:identifiter];
+    SWPagingViewCell *cell = [columnView dequeueReusableCellWithIdentifier:identifiter];
     if (!cell) {
-        cell = [[SWColumnViewCell alloc] initWithReuseIdentifier:identifiter];
+        cell = [[SWPagingViewCell alloc] initWithReuseIdentifier:identifiter];
         cell.backgroundColor=[UIColor colorWithRed:(rand()%10)/10.f green:(rand()%10)/10.f blue:(rand()%10)/10.f alpha:1];
     }
     return cell;

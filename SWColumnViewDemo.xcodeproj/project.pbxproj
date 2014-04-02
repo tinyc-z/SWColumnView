@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4743317B18EC028200BCCCF0 /* SWPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743317A18EC028200BCCCF0 /* SWPagingView.m */; };
+		4743317F18EC5DD800BCCCF0 /* SWPagingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4743317E18EC5DD800BCCCF0 /* SWPagingViewCell.m */; };
 		475B010E18E93A0600A283E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 475B010D18E93A0600A283E6 /* Foundation.framework */; };
 		475B011018E93A0600A283E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 475B010F18E93A0600A283E6 /* CoreGraphics.framework */; };
 		475B011218E93A0600A283E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 475B011118E93A0600A283E6 /* UIKit.framework */; };
@@ -40,6 +41,8 @@
 /* Begin PBXFileReference section */
 		4743317918EC028200BCCCF0 /* SWPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWPagingView.h; path = SWColumnView/SWPagingView.h; sourceTree = "<group>"; };
 		4743317A18EC028200BCCCF0 /* SWPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWPagingView.m; path = SWColumnView/SWPagingView.m; sourceTree = "<group>"; };
+		4743317D18EC5DD800BCCCF0 /* SWPagingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPagingViewCell.h; sourceTree = "<group>"; };
+		4743317E18EC5DD800BCCCF0 /* SWPagingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPagingViewCell.m; sourceTree = "<group>"; };
 		475B010A18E93A0600A283E6 /* SWColumnViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWColumnViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		475B010D18E93A0600A283E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		475B010F18E93A0600A283E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,6 +97,8 @@
 		4743317C18EC029200BCCCF0 /* SWPagingView */ = {
 			isa = PBXGroup;
 			children = (
+				4743317D18EC5DD800BCCCF0 /* SWPagingViewCell.h */,
+				4743317E18EC5DD800BCCCF0 /* SWPagingViewCell.m */,
 				4743317918EC028200BCCCF0 /* SWPagingView.h */,
 				4743317A18EC028200BCCCF0 /* SWPagingView.m */,
 			);
@@ -286,6 +291,7 @@
 			files = (
 				4743317B18EC028200BCCCF0 /* SWPagingView.m in Sources */,
 				475B014718E93A2D00A283E6 /* SWColumnView.m in Sources */,
+				4743317F18EC5DD800BCCCF0 /* SWPagingViewCell.m in Sources */,
 				475B014818E93A2D00A283E6 /* SWColumnViewCell.m in Sources */,
 				475B012418E93A0600A283E6 /* ViewController.m in Sources */,
 				475B011E18E93A0600A283E6 /* AppDelegate.m in Sources */,

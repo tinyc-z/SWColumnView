@@ -9,24 +9,8 @@
 #import "SWPagingView.h"
 #import "SWColumnView.h"
 #import <objc/runtime.h>
+#import "SWPagingViewCell.h"
 
-
-@implementation SWColumnViewCell (uitls)
-@dynamic isShow;
-
-
-static NSString *const kColumnViewIsShowKey;
-
-- (void)setIsShow:(BOOL)b
-{
-    objc_setAssociatedObject(self, &kColumnViewIsShowKey,@(b),OBJC_ASSOCIATION_ASSIGN);
-}
-- (BOOL)isShow
-{
-    return [objc_getAssociatedObject(self, &kColumnViewIsShowKey) boolValue];
-}
-
-@end
 
 @interface SWPagingView()<SWColumnViewDelegate>
 //@property(nonatomic,assign)BOOL pagingEadbled;
@@ -42,8 +26,7 @@ static NSString *const kColumnViewIsShowKey;
     if (self) {
         // Initialization code
         self.pagingEnabled=YES;
-        self.enqueueReusableCellPaddingLeft=0;
-        self.enqueueReusableCellPaddingRight=0;
+        self.enqueueReusableCellPadding=0;
     }
     return self;
 }
@@ -68,12 +51,12 @@ static NSString *const kColumnViewIsShowKey;
 
 - (CGFloat)contentBundsLeft
 {
-    return self.clipsBundsLeft-_enqueueReusableCellPaddingLeft;
+    return self.clipsBundsLeft-self.enqueueReusableCellPadding;
 }
 
 - (CGFloat)contentBundsRight
 {
-    return self.clipsBundsRight+_enqueueReusableCellPaddingRight;
+    return self.clipsBundsRight+self.enqueueReusableCellPadding;
 }
 
 - (CGFloat)clipsBundsLeft
@@ -93,32 +76,32 @@ static NSString *const kColumnViewIsShowKey;
 
 - (void)layoutVisibleCells
 {
-
     [super layoutVisibleCells];
-    
-    CGFloat frameLeft,frameRight,tmpL,tmpR;
-    frameLeft=self.clipsBundsLeft;
-    frameRight=self.clipsBundsRight;
-    
-    for(SWColumnViewCell *cell in self.visibleCells){
-        tmpL=CGRectGetMinX(cell.frame);
-        tmpR=CGRectGetMaxX(cell.frame);
-        if((tmpL<frameRight&&tmpL>frameLeft)||(tmpR>frameLeft&&tmpL<frameRight)){
-            if (!cell.isShow) {
-                cell.isShow=YES;
-                if ([delegate respondsToSelector:@selector(pageView:didAppearIndex:)]) {
-                    [delegate pageView:self didAppearIndex:cell.index];
+    if (self.enqueueReusableCellPadding>0) {
+        CGFloat frameLeft,frameRight,tmpL,tmpR;
+        frameLeft=self.clipsBundsLeft;
+        frameRight=self.clipsBundsRight;
+        NSArray *cells = self.visibleCells;
+        for(SWPagingViewCell *cell in cells){
+            tmpL=CGRectGetMinX(cell.frame);
+            tmpR=CGRectGetMaxX(cell.frame);
+            if((tmpL<frameRight&&tmpL>frameLeft)||(tmpR>frameLeft&&tmpL<frameRight)){
+                if (!cell.isInClipBounds) {
+                    cell.isInClipBounds=YES;
+                    if ([delegate respondsToSelector:@selector(pageView:didAppearIndex:)]) {
+                        [delegate pageView:self didAppearIndex:cell.index];
+                    }
+                }
+            }else{
+                if (cell.isInClipBounds) {
+                    cell.isInClipBounds=NO;
+                    if ([delegate respondsToSelector:@selector(pageView:didDisAppearIndex:)]) {
+                        [delegate pageView:self didDisAppearIndex:cell.index];
+                    }
                 }
             }
-        }else{
-            if (cell.isShow) {
-                cell.isShow=NO;
-                 if ([delegate respondsToSelector:@selector(pageView:didDisAppearIndex:)]) {
-                     [delegate pageView:self didDisAppearIndex:cell.index];
-                 }
-            }
+            
         }
-
     }
 }
 

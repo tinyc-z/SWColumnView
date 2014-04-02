@@ -44,7 +44,7 @@
 
 - (void)layoutVisibleCells;//不提倡手动调用
 
-- (SWColumnViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 
 - (void)scrollToColumn:(NSInteger)index animate:(BOOL)animate;
 - (void)scrollToStart:(BOOL)animate;

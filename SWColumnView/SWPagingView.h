@@ -7,12 +7,9 @@
 //
 
 #import "SWColumnView.h"
+#import "SWPagingViewCell.h"
 
 @class SWPagingView;
-
-@interface SWColumnViewCell (uitls)
-@property (nonatomic,assign)BOOL isShow;
-@end
 
 @protocol SWPagingViewDelegate <NSObject,UIScrollViewDelegate>
 
@@ -27,10 +24,13 @@
 - (void)pageView:(SWColumnView *)page didUnLoadIndex:(NSInteger)index;
 
 
-//current delegate
 - (void)pageViewDidScroll:(SWPagingView *)page;
 - (void)pageView:(SWPagingView *)page didStopInIndex:(NSInteger)index;
 
+/**
+ *  在enqueueReusableCellPadding>0时，下一个界面生成会先与到达clipsToBounds边界，所以
+ *  在enqueueReusableCellPadding>0的时候会起错用，用于检测页面进入clipsToBounds范围。
+ */
 - (void)pageView:(SWColumnView *)columnView didAppearIndex:(NSInteger)index;
 - (void)pageView:(SWColumnView *)columnView didDisAppearIndex:(NSInteger)index;
 
@@ -39,8 +39,10 @@
 
 
 @interface SWPagingView : SWColumnView
-@property (nonatomic,assign)CGFloat enqueueReusableCellPaddingLeft;
-@property (nonatomic,assign)CGFloat enqueueReusableCellPaddingRight;
+/**
+ *  定义距离可视范围边界还有远时生成界面
+ */
+@property (nonatomic,assign)CGFloat enqueueReusableCellPadding;
 
 @property (nonatomic,assign)id delegate;
 

@@ -209,7 +209,7 @@ NSString * const kCCellIndexKey = @"index";
     return cell;
 }
 
-- (SWColumnViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier
+- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier
 {
     NSMutableArray *cells = self.reusableCells[identifier];
 
