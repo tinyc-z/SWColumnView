@@ -23,6 +23,7 @@ NSString * const kCCellIndexKey = @"index";
 
 @property (nonatomic,assign)NSInteger cellcount;
 
+@property (nonatomic,assign)BOOL loadData;
 @end
 
 @implementation SWColumnView
@@ -38,7 +39,7 @@ NSString * const kCCellIndexKey = @"index";
         tap.delegate = self;
 
         [self addGestureRecognizer:tap];
-        [self addObserver:self forKeyPath:kCContentOffset options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+//        [self addObserver:self forKeyPath:kCContentOffset options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     }
     return self;
 }
@@ -46,15 +47,16 @@ NSString * const kCCellIndexKey = @"index";
 
 - (void)dealloc
 {
-    [self removeObserver:self forKeyPath:kCContentOffset];
+//    [self removeObserver:self forKeyPath:kCContentOffset];
     self.delegate=nil;
     self.dataSource=nil;
 }
 
-//-(void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//}
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self layoutVisibleCells];
+}
 
 - (CGFloat)contentBundsLeft
 {
@@ -68,6 +70,11 @@ NSString * const kCCellIndexKey = @"index";
 
 - (void)layoutVisibleCells
 {
+    if (!self.loadData) {
+        [self reloadData];
+        return;
+    }
+    
     CGFloat contentBundsLeft = [self contentBundsLeft];
     CGFloat contentBundsRight = [self contentBundsRight];
     
@@ -233,6 +240,7 @@ NSString * const kCCellIndexKey = @"index";
 
 - (void)reloadData
 {
+    self.loadData=YES;
 //    NSLog(@"--%@",NSStringFromSelector(_cmd));
     _cellcount = [self.dataSource columnViewNumberOfColumns:self];
     
@@ -261,8 +269,10 @@ NSString * const kCCellIndexKey = @"index";
     }
     
     [_visibleCells removeAllObjects];
-
+    
     self.contentSize=CGSizeMake(widthCount,_cellsHeight);
+
+    [self layoutVisibleCells];
 }
 
 
@@ -338,9 +348,9 @@ NSString * const kCCellIndexKey = @"index";
 
 
 #pragma mark observer
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    [self layoutVisibleCells];
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    [self layoutVisibleCells];
+//}
 
 @end
