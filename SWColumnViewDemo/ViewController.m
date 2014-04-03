@@ -8,11 +8,14 @@
 
 #import "ViewController.h"
 #import "SWPagingView.h"
+#import "MyPageDataSource.h"
 
 
 @interface ViewController ()<SWColumnViewDataSource,SWColumnViewDelegate>
 @property (nonatomic,strong)SWPagingView *tableView;
 @property (nonatomic,strong)NSMutableArray *datas;
+@property (nonatomic,strong)MyPageDataSource *dataSource;
+
 @end
 
 @implementation ViewController
@@ -21,25 +24,31 @@
 {
     [super viewDidLoad];
     self.tableView = [[SWPagingView alloc] initWithFrame:CGRectInset(self.view.bounds, 50, 50)];
-    self.tableView.dataSource=self;
+    
+     self.dataSource = [[MyPageDataSource alloc] init];
+
+    self.tableView.dataSource=self.dataSource;
     self.tableView.delegate=self;
 
-//    self.tableView.enqueueReusableCellPaddingLeft=10;
-//    self.tableView.enqueueReusableCellPaddingRight=10;
-//    
-    
     self.tableView.clipsToBounds=NO;
     
     self.tableView.layer.borderColor=[UIColor blackColor].CGColor;
     self.tableView.layer.borderWidth=0.5;
     
     [self.view addSubview:self.tableView];
-	// Do any additional setup after loading the view, typically from a nib.
+
     NSLog(@"viewDidLoad");
     self.datas=[[NSMutableArray alloc] init];
     for (NSInteger i=0; i<50000; i++) {
         [self.datas addObject:@(i)];
     }
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
 
@@ -85,10 +94,10 @@
 //    NSLog(@"%@",NSStringFromSelector(_cmd));
 //}
 
-- (void)pageView:(SWPagingView *)page didLoadIndex:(NSInteger)index
-{
-    NSLog(@"%@",NSStringFromSelector(_cmd));
-}
+//- (void)pageView:(SWPagingView *)page didLoadIndex:(NSInteger)index
+//{
+//    NSLog(@"%@",NSStringFromSelector(_cmd));
+//}
 
 //- (void)pageView:(SWColumnView *)page didUnLoadIndex:(NSInteger)index
 //{
@@ -96,14 +105,14 @@
 //}
 
 
-- (void)pageView:(SWPagingView *)page didAppearIndex:(NSInteger)index
-{
-    NSLog(@"%@:%d",NSStringFromSelector(_cmd),index);
-}
-- (void)pageView:(SWColumnView *)columnView didDisAppearIndex:(NSInteger)index
-{
-    NSLog(@"%@:%d",NSStringFromSelector(_cmd),index);
-}
+//- (void)pageView:(SWPagingView *)page didAppearIndex:(NSInteger)index
+//{
+//    NSLog(@"%@:%d",NSStringFromSelector(_cmd),index);
+//}
+//- (void)pageView:(SWColumnView *)columnView didDisAppearIndex:(NSInteger)index
+//{
+//    NSLog(@"%@:%d",NSStringFromSelector(_cmd),index);
+//}
 
 
 @end

@@ -8,7 +8,27 @@
 
 #import "SWPagingViewCell.h"
 
+@interface SWPagingViewCell()
+
+@end
+
 @implementation SWPagingViewCell
+
+
+-(id)initWithContentView:(UIView<SWPagingContentViewProtocol> *)view
+{
+    if (self=[super initWithReuseIdentifier:NSStringFromClass(view.class)]) {
+        self.contentView = view;
+        [self addSubview:self.contentView];
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.contentView.frame=UIEdgeInsetsInsetRect(self.bounds, self.contentInsets);
+}
 
 - (void)prepareForReuse
 {

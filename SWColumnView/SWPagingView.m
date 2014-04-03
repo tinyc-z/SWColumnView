@@ -24,16 +24,16 @@
     if (self) {
         // Initialization code
         self.pagingEnabled=YES;
-        self.enqueueReusableCellPadding=0;
+        self.enqueueReusablePadding=0;
     }
     return self;
 }
+
 
 - (void)dealloc
 {
     super.delegate=nil;
     delegate=nil;
-    
 }
 
 - (void)setDelegate:(id)d
@@ -47,14 +47,20 @@
     return  super.delegate;
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+}
+
+
 - (CGFloat)contentBundsLeft
 {
-    return self.clipsBundsLeft-self.enqueueReusableCellPadding;
+    return self.clipsBundsLeft-self.enqueueReusablePadding;
 }
 
 - (CGFloat)contentBundsRight
 {
-    return self.clipsBundsRight+self.enqueueReusableCellPadding;
+    return self.clipsBundsRight+self.enqueueReusablePadding;
 }
 
 - (CGFloat)clipsBundsLeft
@@ -72,10 +78,12 @@
     return self.frame.size.width;
 }
 
+
+
 - (void)layoutVisibleCells
 {
     [super layoutVisibleCells];
-    if (self.enqueueReusableCellPadding>0) {
+    if (self.enqueueReusablePadding>0) {
         CGFloat frameLeft,frameRight,tmpL,tmpR;
         frameLeft=self.clipsBundsLeft;
         frameRight=self.clipsBundsRight;

@@ -16,7 +16,7 @@
 @required
 - (NSInteger)columnViewNumberOfColumns:(SWColumnView *)columnView;
 
-- (SWColumnViewCell *)columnView:(SWColumnView *)columnView cellForColumnIndex:(NSInteger )index;
+- (id)columnView:(SWColumnView *)columnView cellForColumnIndex:(NSInteger )index;
 
 @optional
 - (CGFloat)columnView:(SWColumnView *)columnView widthForColumnAtIndex:(NSInteger )index;

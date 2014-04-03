@@ -26,6 +26,13 @@
 		475B014718E93A2D00A283E6 /* SWColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 475B014418E93A2D00A283E6 /* SWColumnView.m */; };
 		475B014818E93A2D00A283E6 /* SWColumnViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 475B014618E93A2D00A283E6 /* SWColumnViewCell.m */; };
 		479ABE5218E95E5E00C64AC3 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479ABE5118E95E5E00C64AC3 /* Reveal.framework */; };
+		47E19F7818ED4C6F001E1985 /* SWClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E19F7718ED4C6F001E1985 /* SWClipView.m */; };
+		47E19F7C18ED4DB6001E1985 /* SWPagingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E19F7B18ED4DB6001E1985 /* SWPagingDataSource.m */; };
+		47E19F8018ED7B36001E1985 /* MyPageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E19F7F18ED7B36001E1985 /* MyPageDataSource.m */; };
+		47E19F8318ED7C6C001E1985 /* MyPage1.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E19F8218ED7C6C001E1985 /* MyPage1.m */; };
+		47E19F8618ED7C78001E1985 /* MyPageImge.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E19F8518ED7C78001E1985 /* MyPageImge.m */; };
+		47E19F8918ED7C84001E1985 /* MyPageText.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E19F8818ED7C84001E1985 /* MyPageText.m */; };
+		47E19F8D18ED85E8001E1985 /* yellowBoy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47E19F8C18ED85E8001E1985 /* yellowBoy.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +74,20 @@
 		475B014518E93A2D00A283E6 /* SWColumnViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWColumnViewCell.h; sourceTree = "<group>"; };
 		475B014618E93A2D00A283E6 /* SWColumnViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWColumnViewCell.m; sourceTree = "<group>"; };
 		479ABE5118E95E5E00C64AC3 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		47E19F7618ED4C6F001E1985 /* SWClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWClipView.h; path = SWColumnView/SWClipView.h; sourceTree = "<group>"; };
+		47E19F7718ED4C6F001E1985 /* SWClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWClipView.m; path = SWColumnView/SWClipView.m; sourceTree = "<group>"; };
+		47E19F7A18ED4DB6001E1985 /* SWPagingDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPagingDataSource.h; sourceTree = "<group>"; };
+		47E19F7B18ED4DB6001E1985 /* SWPagingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPagingDataSource.m; sourceTree = "<group>"; };
+		47E19F7D18ED5213001E1985 /* SWPagingProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWPagingProtocol.h; sourceTree = "<group>"; };
+		47E19F7E18ED7B36001E1985 /* MyPageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageDataSource.h; sourceTree = "<group>"; };
+		47E19F7F18ED7B36001E1985 /* MyPageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageDataSource.m; sourceTree = "<group>"; };
+		47E19F8118ED7C6C001E1985 /* MyPage1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPage1.h; sourceTree = "<group>"; };
+		47E19F8218ED7C6C001E1985 /* MyPage1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPage1.m; sourceTree = "<group>"; };
+		47E19F8418ED7C78001E1985 /* MyPageImge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageImge.h; sourceTree = "<group>"; };
+		47E19F8518ED7C78001E1985 /* MyPageImge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageImge.m; sourceTree = "<group>"; };
+		47E19F8718ED7C84001E1985 /* MyPageText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageText.h; sourceTree = "<group>"; };
+		47E19F8818ED7C84001E1985 /* MyPageText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageText.m; sourceTree = "<group>"; };
+		47E19F8C18ED85E8001E1985 /* yellowBoy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yellowBoy.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +118,10 @@
 		4743317C18EC029200BCCCF0 /* SWPagingView */ = {
 			isa = PBXGroup;
 			children = (
+				47E19F8C18ED85E8001E1985 /* yellowBoy.jpg */,
+				47E19F7918ED4D86001E1985 /* SWPagingDataSource */,
+				47E19F7618ED4C6F001E1985 /* SWClipView.h */,
+				47E19F7718ED4C6F001E1985 /* SWClipView.m */,
 				4743318718EC64DC00BCCCF0 /* SWPagingViewCell.h */,
 				4743318818EC64DC00BCCCF0 /* SWPagingViewCell.m */,
 				4743317918EC028200BCCCF0 /* SWPagingView.h */,
@@ -141,6 +166,14 @@
 		475B011318E93A0600A283E6 /* SWColumnViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				47E19F8118ED7C6C001E1985 /* MyPage1.h */,
+				47E19F8218ED7C6C001E1985 /* MyPage1.m */,
+				47E19F8418ED7C78001E1985 /* MyPageImge.h */,
+				47E19F8518ED7C78001E1985 /* MyPageImge.m */,
+				47E19F8718ED7C84001E1985 /* MyPageText.h */,
+				47E19F8818ED7C84001E1985 /* MyPageText.m */,
+				47E19F7E18ED7B36001E1985 /* MyPageDataSource.h */,
+				47E19F7F18ED7B36001E1985 /* MyPageDataSource.m */,
 				475B011C18E93A0600A283E6 /* AppDelegate.h */,
 				475B011D18E93A0600A283E6 /* AppDelegate.m */,
 				475B011F18E93A0600A283E6 /* Main.storyboard */,
@@ -190,6 +223,16 @@
 				475B014618E93A2D00A283E6 /* SWColumnViewCell.m */,
 			);
 			path = SWColumnView;
+			sourceTree = "<group>";
+		};
+		47E19F7918ED4D86001E1985 /* SWPagingDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				47E19F7D18ED5213001E1985 /* SWPagingProtocol.h */,
+				47E19F7A18ED4DB6001E1985 /* SWPagingDataSource.h */,
+				47E19F7B18ED4DB6001E1985 /* SWPagingDataSource.m */,
+			);
+			name = SWPagingDataSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +313,7 @@
 			files = (
 				475B012618E93A0600A283E6 /* Images.xcassets in Resources */,
 				475B011818E93A0600A283E6 /* InfoPlist.strings in Resources */,
+				47E19F8D18ED85E8001E1985 /* yellowBoy.jpg in Resources */,
 				475B012118E93A0600A283E6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,9 +337,15 @@
 				475B014718E93A2D00A283E6 /* SWColumnView.m in Sources */,
 				4743318918EC64DC00BCCCF0 /* SWPagingViewCell.m in Sources */,
 				475B014818E93A2D00A283E6 /* SWColumnViewCell.m in Sources */,
+				47E19F8918ED7C84001E1985 /* MyPageText.m in Sources */,
+				47E19F7818ED4C6F001E1985 /* SWClipView.m in Sources */,
 				475B012418E93A0600A283E6 /* ViewController.m in Sources */,
+				47E19F8318ED7C6C001E1985 /* MyPage1.m in Sources */,
+				47E19F7C18ED4DB6001E1985 /* SWPagingDataSource.m in Sources */,
 				475B011E18E93A0600A283E6 /* AppDelegate.m in Sources */,
+				47E19F8618ED7C78001E1985 /* MyPageImge.m in Sources */,
 				475B011A18E93A0600A283E6 /* main.m in Sources */,
+				47E19F8018ED7B36001E1985 /* MyPageDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
