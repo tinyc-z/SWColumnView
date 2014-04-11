@@ -20,6 +20,8 @@ NSString * const kCCellIndexKey = @"index";
 
 @property (nonatomic,strong)NSArray *cellsWidth;
 @property (nonatomic,assign)CGFloat cellsHeight;
+@property (nonatomic,assign)CGFloat cellsWidthCount;
+
 
 @property (nonatomic,assign)NSInteger cellcount;
 
@@ -74,6 +76,9 @@ NSString * const kCCellIndexKey = @"index";
         [self reloadData];
         return;
     }
+    _cellsHeight = CGRectGetHeight(self.bounds)-(self.contentInset.bottom+self.contentInset.top);
+    
+    self.contentSize=CGSizeMake(_cellsWidthCount,_cellsHeight);
     
     CGFloat contentBundsLeft = [self contentBundsLeft];
     CGFloat contentBundsRight = [self contentBundsRight];
@@ -124,7 +129,7 @@ NSString * const kCCellIndexKey = @"index";
                 //visible
                 cell=[self insertCellAtLineIndex:i withFrame:CGRectMake(offsetL, 0, tmpfloat, _cellsHeight)];
                 [_visibleCells addObject:cell];
-                [self didLoadCell:i];
+                [self didLoadCell:cell index:i];
             }else{
                 break;
             }
@@ -144,7 +149,7 @@ NSString * const kCCellIndexKey = @"index";
                 //visible
                 cell=[self insertCellAtLineIndex:i withFrame:CGRectMake(offsetL, 0, tmpfloat, _cellsHeight)];
                 [_visibleCells insertObject:cell atIndex:0];
-                [self didLoadCell:i];
+                [self didLoadCell:cell index:i];
             }else{
                 break;
             }
@@ -160,7 +165,7 @@ NSString * const kCCellIndexKey = @"index";
                 //visible
                 cell=[self insertCellAtLineIndex:i withFrame:CGRectMake(offsetL, 0, tmpfloat, _cellsHeight)];
                 [_visibleCells addObject:cell];
-                [self didLoadCell:i];
+                [self didLoadCell:cell index:i];
                 start=YES;
             }else{
                 if (start) {
@@ -200,10 +205,11 @@ NSString * const kCCellIndexKey = @"index";
 }
 
 
-- (void)didLoadCell:(NSInteger)index
+- (void)didLoadCell:(SWColumnViewCell *)cell index:(NSInteger)i
 {
+    [cell setNeedsLayout];
     if ([self.delegate respondsToSelector:@selector(columnView:didLoadIndex:)]) {
-        [self.delegate columnView:self didLoadIndex:index];
+        [self.delegate columnView:self didLoadIndex:i];
     }
 }
 
@@ -245,10 +251,7 @@ NSString * const kCCellIndexKey = @"index";
     _cellcount = [self.dataSource columnViewNumberOfColumns:self];
     
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    CGFloat widthCount = 0,cotentInsetY;
-    
-    cotentInsetY = self.contentInset.bottom+self.contentInset.top;
-
+    CGFloat widthCount = 0;
     CGFloat tmp;
     for (NSInteger i =0;i<_cellcount;i++) {
         tmp = [self widthForColumnAtIndex:i];
@@ -256,10 +259,10 @@ NSString * const kCCellIndexKey = @"index";
         widthCount+=tmp;
     }
     
+    _cellsWidthCount=widthCount;
+    
     _cellsWidth = arr;
-    _cellsHeight = CGRectGetHeight(self.bounds)-cotentInsetY;
-    
-    
+
     for (SWColumnViewCell *cell in _visibleCells) {
         [self enqueueReusableCell:cell];
         [cell removeFromSuperview];
@@ -270,8 +273,6 @@ NSString * const kCCellIndexKey = @"index";
     
     [_visibleCells removeAllObjects];
     
-    self.contentSize=CGSizeMake(widthCount,_cellsHeight);
-
     [self layoutVisibleCells];
 }
 

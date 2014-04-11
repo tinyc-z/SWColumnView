@@ -34,6 +34,7 @@
 {
     super.delegate=nil;
     delegate=nil;
+    self.dataSource=nil;
 }
 
 - (void)setDelegate:(id)d
@@ -151,7 +152,8 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if([delegate respondsToSelector:@selector(pageView:didStopInIndex:)]){
-        [delegate pageView:self didStopInIndex:0];
+        NSInteger index = (scrollView.contentOffset.x-scrollView.contentInset.left)/CGRectGetWidth(self.frame);
+        [delegate pageView:self didStopInIndex:index];
     }
 }
 

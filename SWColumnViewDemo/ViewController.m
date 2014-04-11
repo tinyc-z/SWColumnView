@@ -28,9 +28,9 @@
      self.dataSource = [[MyPageDataSource alloc] init];
 
     self.tableView.dataSource=self.dataSource;
-    self.tableView.delegate=self;
 
-    self.tableView.clipsToBounds=NO;
+//    self.tableView.dataSource=self;
+    self.tableView.delegate=self;
     
     self.tableView.layer.borderColor=[UIColor blackColor].CGColor;
     self.tableView.layer.borderWidth=0.5;
