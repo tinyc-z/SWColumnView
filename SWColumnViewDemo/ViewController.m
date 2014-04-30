@@ -89,15 +89,15 @@
     [view scrollToStart:YES];
 }
 
-//- (void)pageView:(SWPagingView *)page didStopInIndex:(NSInteger)index
-//{
-//    NSLog(@"%@",NSStringFromSelector(_cmd));
-//}
+- (void)pageView:(SWPagingView *)page didStopInIndex:(NSInteger)index
+{
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+}
 
-//- (void)pageView:(SWPagingView *)page didLoadIndex:(NSInteger)index
-//{
-//    NSLog(@"%@",NSStringFromSelector(_cmd));
-//}
+- (void)pageView:(SWPagingView *)page didLoadIndex:(NSInteger)index
+{
+    NSLog(@"%@",NSStringFromSelector(_cmd));
+}
 
 //- (void)pageView:(SWColumnView *)page didUnLoadIndex:(NSInteger)index
 //{
