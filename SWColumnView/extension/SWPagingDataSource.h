@@ -13,6 +13,8 @@ extern NSString *const kSWPCellIdentifierKey;
 extern NSString *const kSWPCellContentKey;
 extern NSString *const kSWPCellExextendDataKey;
 
+extern NSDictionary *SWPCellMake(NSString *identifier, id content, id ext);
+
 @interface SWPagingDataSource : NSObject<SWColumnViewDataSource>
 @property(nonatomic,strong)NSArray *objs;
 

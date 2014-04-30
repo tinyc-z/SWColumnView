@@ -14,6 +14,15 @@ NSString *const kSWPCellIdentifierKey   =   @"CellIdentifier";
 NSString *const kSWPCellContentKey         =   @"CellContent";
 NSString *const kSWPCellExextendDataKey    =   @"CellExextendData";
 
+NSDictionary *SWPCellMake(NSString *identifier, id content, id ext)
+{
+    NSMutableDictionary *dicx = [[NSMutableDictionary alloc] initWithCapacity:3];
+    dicx[kSWPCellIdentifierKey]=identifier;
+    if(content)dicx[kSWPCellContentKey]=content;
+    if(ext)dicx[kSWPCellExextendDataKey]=ext;
+    return dicx;
+}
+
 @interface SWPagingDataSource()
 @end
 
