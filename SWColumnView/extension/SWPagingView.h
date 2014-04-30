@@ -31,8 +31,8 @@
  *  在enqueueReusableCellPadding>0时，下一个界面生成会先与到达clipsToBounds边界，所以
  *  在enqueueReusableCellPadding>0的时候会起错用，用于检测页面进入clipsToBounds范围。
  */
-- (void)pageView:(SWColumnView *)columnView didAppearIndex:(NSInteger)index;
-- (void)pageView:(SWColumnView *)columnView didDisAppearIndex:(NSInteger)index;
+- (void)pageView:(SWColumnView *)page didAppearIndex:(NSInteger)index;
+- (void)pageView:(SWColumnView *)page didDisAppearIndex:(NSInteger)index;
 
 
 @end
@@ -43,6 +43,6 @@
  *  定义距离可视范围边界还有远时生成界面
  */
 @property (nonatomic,assign)CGFloat enqueueReusablePadding;
-@property (nonatomic,assign)id delegate;
+@property (nonatomic,weak)id delegate;
 
 @end
