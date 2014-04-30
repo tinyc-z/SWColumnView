@@ -39,8 +39,8 @@
 
 @interface SWColumnView : UIScrollView
 
-@property (nonatomic,assign)id <SWColumnViewDataSource> dataSource;
-@property (nonatomic,assign)id <SWColumnViewDelegate> delegate;
+@property (nonatomic,weak)id <SWColumnViewDataSource> dataSource;
+@property (nonatomic,weak)id <SWColumnViewDelegate> delegate;
 
 - (void)layoutVisibleCells;//不提倡手动调用
 
