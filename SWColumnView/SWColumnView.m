@@ -53,6 +53,12 @@ NSString * const kCCellIndexKey = @"index";
     return self;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    //fix ios 5 uibutton don't responding click
+    return ![touch.view isKindOfClass:[UIControl class]];
+}
+
 - (void)addObserver
 {
     [self addObserver:self forKeyPath:kCContentOffset options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
@@ -224,9 +230,11 @@ NSString * const kCCellIndexKey = @"index";
     if (cells) {
         [cells addObject:cell];
     }else{
-        NSMutableArray *cells = [[NSMutableArray alloc] init];
-        [cells addObject:cell];
-        _reusableCells[cell.reuseIdentifier]=cells;
+        if (cell.reuseIdentifier) {
+            NSMutableArray *cells = [[NSMutableArray alloc] init];
+            [cells addObject:cell];
+            _reusableCells[cell.reuseIdentifier]=cells;
+        }
     }
 }
 
@@ -310,6 +318,18 @@ NSString * const kCCellIndexKey = @"index";
     [self layoutVisibleCells];
 }
 
+
+- (SWColumnViewCell *)cellAtIndex:(NSUInteger)index
+{
+    SWColumnViewCell *targetCell = nil;
+    for (SWColumnViewCell *cell in _visibleCells) {
+        if (cell.index == index) {
+            targetCell = cell;
+            break;
+        }
+    }
+    return targetCell;
+}
 
 - (NSArray *)visibleCells
 {

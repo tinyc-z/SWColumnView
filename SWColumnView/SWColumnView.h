@@ -56,5 +56,6 @@
 
 - (NSArray *)visibleCells;
 - (NSArray *)indexsForVisibleRows;
+- (SWColumnViewCell *)cellAtIndex:(NSUInteger)index;
 
 @end
