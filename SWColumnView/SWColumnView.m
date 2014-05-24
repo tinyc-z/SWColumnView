@@ -46,17 +46,11 @@ NSString * const kCCellIndexKey = @"index";
         _visibleCells = [[NSMutableArray alloc] init];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
         tap.delegate = self;
-
+        tap.cancelsTouchesInView=NO;
         [self addGestureRecognizer:tap];
         [self addObserver];
     }
     return self;
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    //fix ios 5 uibutton don't responding click
-    return ![touch.view isKindOfClass:[UIControl class]];
 }
 
 - (void)addObserver
