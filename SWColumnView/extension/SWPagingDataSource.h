@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "SWColumnView.h"
 
-extern NSString *const kSWPCellIdentifierKey;
-extern NSString *const kSWPCellContentKey;
-extern NSString *const kSWPCellExextendDataKey;
+@interface SWPCellObj : NSObject
+@property (nonatomic,strong)NSString *identifier;
+@property (nonatomic,strong)id content;
+@property (nonatomic,strong)id ext;
+@end
 
-extern NSDictionary *SWPCellMake(NSString *identifier, id content, id ext);
+extern SWPCellObj *SWPCellMake(NSString *identifier, id content, id ext);
 
 @interface SWPagingDataSource : NSObject<SWColumnViewDataSource>
 @property(nonatomic,strong)NSArray *objs;

@@ -10,8 +10,8 @@
 
 @protocol SWPagingContentViewProtocol <NSObject>
 
-@required
-///fill data
--(void)setContent:(id)data;
+@optional
+-(void)setContent:(id)data;//废弃
+-(void)setContent:(id)data ext:(id)ext;
 
 @end

@@ -15,4 +15,5 @@
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 - (void)prepareForReuse;
+- (void)prepareForRecycle;
 @end

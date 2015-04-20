@@ -12,7 +12,7 @@
 
 
 @interface ViewController ()<SWColumnViewDataSource,SWColumnViewDelegate>
-@property (nonatomic,strong)SWPagingView *tableView;
+@property (nonatomic,strong)SWColumnView *tableView;
 @property (nonatomic,strong)NSMutableArray *datas;
 @property (nonatomic,strong)MyPageDataSource *dataSource;
 
@@ -23,17 +23,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[SWPagingView alloc] initWithFrame:CGRectInset(self.view.bounds, 50, 50)];
+    self.tableView = [[SWColumnView alloc] initWithFrame:CGRectInset(self.view.bounds, 50, 50)];
     
      self.dataSource = [[MyPageDataSource alloc] init];
 
-    self.tableView.dataSource=self.dataSource;
+//    self.tableView.dataSource=self.dataSource;
 
-//    self.tableView.dataSource=self;
+    self.tableView.dataSource=self;
     self.tableView.delegate=self;
     
     self.tableView.layer.borderColor=[UIColor blackColor].CGColor;
     self.tableView.layer.borderWidth=0.5;
+    self.tableView.pagingEnabled=YES;
     
     [self.view addSubview:self.tableView];
 
@@ -70,6 +71,7 @@
     SWPagingViewCell *cell = [columnView dequeueReusableCellWithIdentifier:identifiter];
     if (!cell) {
         cell = [[SWPagingViewCell alloc] initWithReuseIdentifier:identifiter];
+        cell.isAccessibilityElement=YES;
         cell.backgroundColor=[UIColor colorWithRed:(rand()%10)/10.f green:(rand()%10)/10.f blue:(rand()%10)/10.f alpha:1];
     }
     return cell;
@@ -77,7 +79,7 @@
 
 - (CGFloat)columnView:(SWColumnView *)View widthForColumnAtIndex:(NSInteger )index
 {
-    return self.view.frame.size.width-100;
+    return (self.view.frame.size.width-100)/3;
 }
 
 - (void)pageView:(SWColumnView *)view didSelectIndex:(NSInteger)index

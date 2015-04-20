@@ -19,21 +19,14 @@
 {
     if (self=[super init]) {
         NSMutableArray *tmp = [[NSMutableArray alloc] init];
-        [tmp addObject:@{kSWPCellIdentifierKey:@"MyPageText",
-                        kSWPCellContentKey:@"hello1"
-                        }];
-        [tmp addObject:@{kSWPCellIdentifierKey:@"MyPageImge",
-                         kSWPCellContentKey:[UIImage imageNamed:@"yellowBoy.jpg"]
-                         }];
-        [tmp addObject:@{kSWPCellIdentifierKey:@"MyPageText",
-                         kSWPCellContentKey:@"hello2"
-                         }];
-        [tmp addObject:@{kSWPCellIdentifierKey:@"MyPageImge",
-                         kSWPCellContentKey:[UIImage imageNamed:@"yellowBoy.jpg"]
-                         }];
-        [tmp addObject:@{kSWPCellIdentifierKey:@"MyPageText",
-                         kSWPCellContentKey:@"hello3"
-                         }];
+        
+        [tmp addObject:SWPCellMake(@"MyPageText",@"hello1",nil)];
+        [tmp addObject:SWPCellMake(@"MyPageImge",[UIImage imageNamed:@"yellowBoy.jpg"],nil)];
+        [tmp addObject:SWPCellMake(@"MyPageText",@"hello2",nil)];
+        [tmp addObject:SWPCellMake(@"MyPageImge",[UIImage imageNamed:@"yellowBoy.jpg"],nil)];
+        [tmp addObject:SWPCellMake(@"MyPageText",@"hello3",nil)];
+        [tmp addObject:SWPCellMake(@"MyPageText",@"hello4",nil)];
+        
         self.objs=tmp;
     }
     return self;

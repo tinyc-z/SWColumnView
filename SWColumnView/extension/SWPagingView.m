@@ -37,7 +37,7 @@
     if (self) {
         // Initialization code
         self.pagingEnabled=YES;
-        self.enqueueReusablePadding=0;
+        self.enqueueReusableInset=UIEdgeInsetsMake(0, 0, 0, 0);
     }
     return self;
 }
@@ -71,20 +71,14 @@
     return  super.delegate;
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-}
-
-
 - (CGFloat)contentBundsLeft
 {
-    return self.clipsBundsLeft-self.enqueueReusablePadding;
+    return self.clipsBundsLeft-self.enqueueReusableInset.left;
 }
 
 - (CGFloat)contentBundsRight
 {
-    return self.clipsBundsRight+self.enqueueReusablePadding;
+    return self.clipsBundsRight+self.enqueueReusableInset.right;
 }
 
 - (CGFloat)clipsBundsLeft
@@ -107,7 +101,10 @@
 - (void)layoutVisibleCells
 {
     [super layoutVisibleCells];
-    if (self.enqueueReusablePadding>0) {
+    if (!self.window) {
+        return;
+    }
+    if (self.enqueueReusableInset.left>0||self.enqueueReusableInset.right>0) {
         CGFloat frameLeft,frameRight,tmpL,tmpR;
         frameLeft=self.clipsBundsLeft;
         frameRight=self.clipsBundsRight;

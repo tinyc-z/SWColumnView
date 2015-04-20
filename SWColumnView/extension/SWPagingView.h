@@ -42,7 +42,7 @@
 /**
  *  定义距离可视范围边界还有远时生成界面
  */
-@property (nonatomic,assign)CGFloat enqueueReusablePadding;
+@property (nonatomic,assign)UIEdgeInsets enqueueReusableInset;
 @property (nonatomic,weak)id delegate;
 
 @end

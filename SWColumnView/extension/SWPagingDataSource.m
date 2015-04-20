@@ -10,17 +10,16 @@
 #import "SWPagingViewCell.h"
 #import "SWPagingView.h"
 
-NSString *const kSWPCellIdentifierKey   =   @"CellIdentifier";
-NSString *const kSWPCellContentKey         =   @"CellContent";
-NSString *const kSWPCellExextendDataKey    =   @"CellExextendData";
+@implementation SWPCellObj
+@end
 
-NSDictionary *SWPCellMake(NSString *identifier, id content, id ext)
+SWPCellObj *SWPCellMake(NSString *identifier, id content, id ext)
 {
-    NSMutableDictionary *dicx = [[NSMutableDictionary alloc] initWithCapacity:3];
-    dicx[kSWPCellIdentifierKey]=identifier;
-    if(content)dicx[kSWPCellContentKey]=content;
-    if(ext)dicx[kSWPCellExextendDataKey]=ext;
-    return dicx;
+    SWPCellObj *obj =[SWPCellObj new];
+    obj.identifier=identifier;
+    obj.content=content;
+    obj.ext=ext;
+    return obj;
 }
 
 @interface SWPagingDataSource()
@@ -36,7 +35,7 @@ NSDictionary *SWPCellMake(NSString *identifier, id content, id ext)
 
 - (void)onCreate:(SWPagingViewCell *)cell atIndex:(NSInteger)index
 {
-
+    
 }
 
 - (void)onConfig:(SWPagingViewCell *)cell atIndex:(NSInteger)index
@@ -46,9 +45,9 @@ NSDictionary *SWPCellMake(NSString *identifier, id content, id ext)
 
 - (id)columnView:(SWPagingView *)page cellForColumnIndex:(NSInteger )index
 {
-    NSDictionary *item = self.objs[index];
-    NSString *identifier = item[kSWPCellIdentifierKey];
-    id data = item[kSWPCellContentKey];
+    SWPCellObj *item = self.objs[index];
+    NSString *identifier = item.identifier;
+    id data = item.content;
     
     Class clazz = NSClassFromString(identifier);
     
@@ -60,7 +59,12 @@ NSDictionary *SWPCellMake(NSString *identifier, id content, id ext)
     }
     
     [self onConfig:cell atIndex:index];
-    [cell.contentView setContent:data];
+    if ([cell.contentView respondsToSelector:@selector(setContent:ext:)]) {
+        [cell.contentView setContent:data ext:item.ext];
+    }else{
+        [cell.contentView setContent:data];
+    }
+
     
     return cell;
 }
