@@ -9,6 +9,7 @@
 #import "SWPagingView.h"
 #import "SWColumnView.h"
 #import "SWPagingViewCell.h"
+#import "UIView+Sizes.h"
 
 
 @interface SWPagingView()<SWColumnViewDelegate>
@@ -52,7 +53,11 @@
 
 - (void)setDelegate:(id)d
 {
-    super.delegate=self;
+    if (d) {
+        super.delegate=self;
+    }else{
+        super.delegate=nil;
+    }
     delegate=d;
     _flags.dlgdidSelectIndex=[d respondsToSelector:@selector(pageView:didSelectIndex:)];
     _flags.dlgWillLoadIndex=[d respondsToSelector:@selector(pageView:willLoadIndex:)];
@@ -97,6 +102,12 @@
 }
 
 
+- (NSUInteger)currentPageIndex
+{
+    CGPoint offset = self.contentOffset;
+    NSUInteger currentPage = roundf((offset.x) / (self.size.width));
+    return currentPage;
+}
 
 - (void)layoutVisibleCells
 {

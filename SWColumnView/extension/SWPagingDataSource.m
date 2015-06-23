@@ -47,28 +47,25 @@ SWPCellObj *SWPCellMake(NSString *identifier, id content, id ext)
 {
     SWPCellObj *item = self.objs[index];
     NSString *identifier = item.identifier;
-    id data = item.content;
-    
     Class clazz = NSClassFromString(identifier);
-    
     SWPagingViewCell *cell = [page dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         UIView<SWPagingContentViewProtocol> *content = [[clazz alloc] initWithFrame:CGRectZero];
         cell = [[SWPagingViewCell alloc] initWithContentView:content];
         [self onCreate:cell atIndex:index];
     }
-    
-    [self onConfig:cell atIndex:index];
-    if ([cell.contentView respondsToSelector:@selector(setContent:ext:)]) {
-        [cell.contentView setContent:data ext:item.ext];
-    }else{
-        [cell.contentView setContent:data];
-    }
-
-    
     return cell;
 }
 
-
+- (void)columnView:(SWColumnView *)columnView configColumn:(SWPagingViewCell*)cell
+{
+    NSInteger index = cell.index;
+    [self onConfig:cell atIndex:index];
+    if ([cell.contentView respondsToSelector:@selector(setContent:ext:)]) {
+        SWPCellObj *item = self.objs[index];
+        id data = item.content;
+        [cell.contentView setContent:data ext:item.ext];
+    }
+}
 
 @end

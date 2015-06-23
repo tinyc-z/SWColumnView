@@ -24,9 +24,9 @@
     return self;
 }
 
-- (void)layoutSubviews
+- (void)setFrame:(CGRect)frame
 {
-    [super layoutSubviews];
+    [super setFrame:frame];
     self.contentView.frame=UIEdgeInsetsInsetRect(self.bounds, self.contentInsets);
 }
 

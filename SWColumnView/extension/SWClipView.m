@@ -18,6 +18,23 @@
     return self;
 }
 
+- (void)layoutVisibleCells
+{
+    [super layoutVisibleCells];
+    NSArray *cells=[self visibleCells];
+    for (SWPagingViewCell *item in cells) {
+        UIView <SWPagingContentViewProtocol> *contentView=item.contentView;
+        if ([contentView respondsToSelector:@selector(setOffset:)]) {
+            CGFloat offset = -(self.contentOffset.x-CGRectGetMinX(item.frame))/(item.frame.size.width);
+            if (isnan(offset)&&isinf(offset)) {
+                offset=0;
+            }
+            contentView.offset=offset;
+//            NSLog(@"%p offset=%f",item,offset);
+        }
+    }
+}
+
 - (void)setClipPadding:(CGFloat)clipPadding
 {
     _clipPadding=clipPadding;

@@ -44,5 +44,6 @@
  */
 @property (nonatomic,assign)UIEdgeInsets enqueueReusableInset;
 @property (nonatomic,weak)id delegate;
+@property (nonatomic,readonly)NSUInteger currentPageIndex;
 
 @end

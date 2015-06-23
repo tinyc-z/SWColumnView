@@ -21,6 +21,9 @@
 @optional
 - (CGFloat)columnView:(SWColumnView *)columnView widthForColumnAtIndex:(NSInteger )index;
 
+//finish set frame
+- (void)columnView:(SWColumnView *)columnView configColumn:(SWColumnViewCell *)cell;
+
 @end
 
 

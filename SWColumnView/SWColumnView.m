@@ -35,6 +35,7 @@ NSString * const kCCellIndexKey = @"index";
         unsigned int dlgDidUnLoadIndex : 1;
         
         unsigned int dtsWidthForColumnAtIndex : 1;
+        unsigned int dtsConfigColumn : 1;
         
         unsigned int flagDataLoad : 1;
     } _flags;
@@ -80,6 +81,7 @@ NSString * const kCCellIndexKey = @"index";
 {
     _dataSource=dataSource;
     _flags.dtsWidthForColumnAtIndex=[dataSource respondsToSelector:@selector(columnView:widthForColumnAtIndex:)];
+    _flags.dtsConfigColumn=[dataSource respondsToSelector:@selector(columnView:configColumn:)];
 }
 
 
@@ -279,6 +281,9 @@ NSString * const kCCellIndexKey = @"index";
         [self addSubview:cell];
     }
     cell.frame=frame;
+    if (_flags.dtsConfigColumn) {
+        [self.dataSource columnView:self configColumn:cell];
+    }
     return cell;
 }
 

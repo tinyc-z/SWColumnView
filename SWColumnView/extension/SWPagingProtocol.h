@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @protocol SWPagingContentViewProtocol <NSObject>
-
 @optional
--(void)setContent:(id)data;//废弃
--(void)setContent:(id)data ext:(id)ext;
+@property(nonatomic,assign)CGFloat offset;
 
+@required
+-(void)setContent:(id)data ext:(id)ext;
 @end
