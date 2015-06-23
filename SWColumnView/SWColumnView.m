@@ -41,6 +41,8 @@ NSString * const kCCellIndexKey = @"index";
     } _flags;
 }
 
+@synthesize delegate=_delegate;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -67,6 +69,7 @@ NSString * const kCCellIndexKey = @"index";
 - (void)setDelegate:(id<SWColumnViewDelegate>)delegate
 {
     [super setDelegate:delegate];
+    _delegate=delegate;
     _flags.dlgDidSelectIndex=[delegate respondsToSelector:@selector(columnView:didSelectIndex:)];
     if (_flags.dlgDidSelectIndex) {
         [self addTapGesture];
@@ -75,6 +78,11 @@ NSString * const kCCellIndexKey = @"index";
     _flags.dlgDidLoadIndex=[delegate respondsToSelector:@selector(columnView:didLoadIndex:)];
     _flags.dlgWillUnLoadIndex=[delegate respondsToSelector:@selector(columnView:willUnLoadIndex:)];
     _flags.dlgDidUnLoadIndex=[delegate respondsToSelector:@selector(columnView:didUnLoadIndex:)];
+}
+
+- (id<SWColumnViewDelegate>)delegate
+{
+    return _delegate;
 }
 
 - (void)setDataSource:(id<SWColumnViewDataSource>)dataSource
