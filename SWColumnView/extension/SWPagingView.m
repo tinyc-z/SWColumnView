@@ -9,7 +9,7 @@
 #import "SWPagingView.h"
 #import "SWColumnView.h"
 #import "SWPagingViewCell.h"
-#import "UIView+Sizes.h"
+//#import "UIView+Sizes.h"
 
 
 @interface SWPagingView()<SWColumnViewDelegate>
@@ -105,7 +105,7 @@
 - (NSUInteger)currentPageIndex
 {
     CGPoint offset = self.contentOffset;
-    NSUInteger currentPage = roundf((offset.x) / (self.size.width));
+    NSUInteger currentPage = roundf((offset.x) / (self.bounds.size.width));
     return currentPage;
 }
 
