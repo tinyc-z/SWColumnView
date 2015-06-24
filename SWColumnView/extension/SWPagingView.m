@@ -9,8 +9,6 @@
 #import "SWPagingView.h"
 #import "SWColumnView.h"
 #import "SWPagingViewCell.h"
-//#import "UIView+Sizes.h"
-
 
 @interface SWPagingView()<SWColumnViewDelegate>
 @end
@@ -28,9 +26,10 @@
         unsigned int dlgDidAppearIndex : 1;
         unsigned int dlgDidDisAppearIndex : 1;
     } _flags;
+    id<SWPagingViewDelegate> _delegate;
 }
 
-@synthesize delegate=delegate;
+//@synthesize delegate=delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -47,18 +46,18 @@
 - (void)dealloc
 {
     super.delegate=nil;
-    delegate=nil;
+    _delegate=nil;
     self.dataSource=nil;
 }
 
 - (void)setDelegate:(id)d
 {
     if (d) {
-        super.delegate=self;
+        super.delegate=d;
     }else{
         super.delegate=nil;
     }
-    delegate=d;
+    _delegate=d;
     _flags.dlgdidSelectIndex=[d respondsToSelector:@selector(pageView:didSelectIndex:)];
     _flags.dlgWillLoadIndex=[d respondsToSelector:@selector(pageView:willLoadIndex:)];
     _flags.dlgDidLoadIndex=[d respondsToSelector:@selector(pageView:didLoadIndex:)];
@@ -73,7 +72,7 @@
 
 - (id)delegate
 {
-    return  super.delegate;
+    return  _delegate;
 }
 
 - (CGFloat)contentBundsLeft
@@ -127,14 +126,14 @@
                 if (!cell.isInClipBounds) {
                     cell.isInClipBounds=YES;
                     if (_flags.dlgDidAppearIndex) {
-                        [delegate pageView:self didAppearIndex:cell.index];
+                        [_delegate pageView:self didAppearIndex:cell.index];
                     }
                 }
             }else{
                 if (cell.isInClipBounds) {
                     cell.isInClipBounds=NO;
                     if (_flags.dlgDidDisAppearIndex) {
-                        [delegate pageView:self didDisAppearIndex:cell.index];
+                        [_delegate pageView:self didDisAppearIndex:cell.index];
                     }
                 }
             }
@@ -147,35 +146,35 @@
 - (void)columnView:(SWColumnView *)columnView didSelectIndex:(NSInteger)index
 {
     if (_flags.dlgdidSelectIndex) {
-         [delegate pageView:self didSelectIndex:index];
+         [_delegate pageView:self didSelectIndex:index];
     }
 }
 
 - (void)columnView:(SWColumnView *)columnView willLoadIndex:(NSInteger)index
 {
     if (_flags.dlgWillLoadIndex) {
-        [delegate pageView:self willLoadIndex:index];
+        [_delegate pageView:self willLoadIndex:index];
     }
 }
 
 - (void)columnView:(SWColumnView *)columnView didLoadIndex:(NSInteger)index
 {
     if (_flags.dlgDidLoadIndex) {
-        [delegate pageView:self didLoadIndex:index];
+        [_delegate pageView:self didLoadIndex:index];
     }
 }
 
 - (void)columnView:(SWColumnView *)columnView willUnLoadIndex:(NSInteger)index
 {
     if (_flags.dlgWillUnLoadIndex) {
-        [delegate pageView:self willUnLoadIndex:index];
+        [_delegate pageView:self willUnLoadIndex:index];
     }
 }
 
 - (void)columnView:(SWColumnView *)columnView didUnLoadIndex:(NSInteger)index
 {
     if (_flags.dlgDidUnLoadIndex) {
-        [delegate pageView:self didUnLoadIndex:index];
+        [_delegate pageView:self didUnLoadIndex:index];
     }
 }
 
@@ -184,14 +183,14 @@
 {
     if (_flags.dlgDidStopInIndex) {
         NSInteger index = (scrollView.contentOffset.x-scrollView.contentInset.left)/CGRectGetWidth(self.frame);
-        [delegate pageView:self didStopInIndex:index];
+        [_delegate pageView:self didStopInIndex:index];
     }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (_flags.dlgDidScroll) {
-        [delegate pageViewDidScroll:self];
+        [_delegate pageViewDidScroll:self];
     }
 }
 

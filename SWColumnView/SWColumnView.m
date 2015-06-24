@@ -39,9 +39,9 @@ NSString * const kCCellIndexKey = @"index";
         
         unsigned int flagDataLoad : 1;
     } _flags;
+    
+    id <SWColumnViewDelegate> _delegate;
 }
-
-@synthesize delegate=_delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -95,7 +95,8 @@ NSString * const kCCellIndexKey = @"index";
 
 - (void)dealloc
 {
-    self.delegate=nil;
+    _delegate=nil;
+    super.delegate=nil;
     self.dataSource=nil;
 }
 

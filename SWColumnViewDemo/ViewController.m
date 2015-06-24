@@ -12,7 +12,7 @@
 
 
 @interface ViewController ()<SWColumnViewDataSource,SWColumnViewDelegate>
-@property (nonatomic,strong)SWColumnView *tableView;
+@property (nonatomic,strong)SWPagingView *tableView;
 @property (nonatomic,strong)NSMutableArray *datas;
 @property (nonatomic,strong)MyPageDataSource *dataSource;
 
@@ -23,9 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[SWColumnView alloc] initWithFrame:CGRectInset(self.view.bounds, 50, 50)];
+    self.tableView = [[SWPagingView alloc] initWithFrame:CGRectInset(self.view.bounds, 50, 50)];
     
-     self.dataSource = [[MyPageDataSource alloc] init];
+//     self.dataSource = [[MyPageDataSource alloc] init];
 
 //    self.tableView.dataSource=self.dataSource;
 
@@ -115,6 +115,11 @@
 //{
 //    NSLog(@"%@:%d",NSStringFromSelector(_cmd),index);
 //}
+
+- (void)columnView:(SWColumnView *)columnView willLoadIndex:(NSInteger)index
+{
+    NSLog(@"willLoadIndex:%zd",index);
+}
 
 
 @end

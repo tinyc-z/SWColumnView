@@ -65,6 +65,10 @@ SWPCellObj *SWPCellMake(NSString *identifier, id content, id ext)
         SWPCellObj *item = self.objs[index];
         id data = item.content;
         [cell.contentView setContent:data ext:item.ext];
+    }else if([cell.contentView respondsToSelector:@selector(setContent:)]){
+        SWPCellObj *item = self.objs[index];
+        id data = item.content;
+        [cell.contentView setContent:data];
     }
 }
 
