@@ -53,7 +53,7 @@
 - (void)setDelegate:(id)d
 {
     if (d) {
-        super.delegate=d;
+        super.delegate=self;
     }else{
         super.delegate=nil;
     }
@@ -72,7 +72,7 @@
 
 - (id)delegate
 {
-    return  _delegate;
+    return  super.delegate;
 }
 
 - (CGFloat)contentBundsLeft
